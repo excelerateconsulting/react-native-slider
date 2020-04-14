@@ -11,7 +11,8 @@ import {
   PanResponder,
   View,
   Easing,
-  ViewPropTypes
+  ViewPropTypes,
+  Platform
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -481,7 +482,11 @@ export default class Slider extends PureComponent {
   _thumbHitTest = (e: Object) => {
     var nativeEvent = e.nativeEvent;
     var thumbTouchRect = this._getThumbTouchRect();
-    return thumbTouchRect.containsPoint(nativeEvent.locationX, nativeEvent.locationY);
+
+    var eventx = Platform.OS === 'web' && this.props.orientation === 'vertical' ? nativeEvent.locationY : nativeEvent.locationX
+    var eventy = Platform.OS === 'web' && this.props.orientation === 'vertical' ? nativeEvent.locationX : nativeEvent.locationY
+
+    return thumbTouchRect.containsPoint(eventx, eventy);
   };
 
   _getThumbTouchRect = () => {
