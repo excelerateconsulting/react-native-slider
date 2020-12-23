@@ -104,6 +104,7 @@ export default class Slider extends PureComponent {
       maximumTrackTintColor,
       thumbTintColor,
       thumbImage,
+      thumbImageStyle,
       styles,
       style,
       trackStyle,
@@ -389,10 +390,11 @@ export default class Slider extends PureComponent {
 
   _renderThumbImage = () => {
     var {thumbImage} = this.props;
-
+    let {thumbImageStyle} = this.props;
+    
     if (!thumbImage) return;
 
-    return <Image source={thumbImage} />;
+    return <Image style={thumbImageStyle} source={thumbImage} />;
   };
 }
 
